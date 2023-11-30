@@ -1,6 +1,7 @@
-import {useState} from 'react'
+/*import React, { useState } from 'react';
+import RecommendedVideos from './RecommendedVideos';
 
-const RecommendedVideos = () => {
+const RecommendedVideo = () => {
   const [recommendedVideos, setRecommendedVideos] = useState([
     {
       id: 87654,
@@ -41,52 +42,51 @@ const RecommendedVideos = () => {
       isInWatchlist: false,
     },
   ]);
-  
+
   const handleManageWatchlist = (index) => {
-      const videos = [
-        ...recommendedVideos
-      ]
-      videos[index].isInWatchlist = !videos[index].isInWatchlist; 
-      setRecommendedVideos(videos);
-  }
+    const updatedVideos = [...recommendedVideos];
+    updatedVideos[index].isInWatchlist = !updatedVideos[index].isInWatchlist;
+    setRecommendedVideos(updatedVideos);
+  };
 
-  if(recommendedVideos.length == 0){
-    return(
-      <div calssName="alert alert-warning">
-        Unable to suggest Recommended videos. Please watch more videos.
-      </div>
-    );
-  }
-  
   return (
-    <div className="row">
-       {recommendedVideos.map((video, index) =>{
-        return(
-          <div className="col-md-3"key = {video.id}>
-            <div className="card">
-              <img src={video.thumbnailUrl} className="card-img-top" alt={video.title} />
-              <div className="card-body">
-                <h5 className="card-title">{video.title}</h5>
-                <p className="card-text">{video.description}</p>
-              </div>
-              <ul className="list-group list-group-flush">
-                <li className="list-group-item">{video.category}</li>
-                <li className="list-group-item">{video.publishedOn}</li>
-                <li className="list-group-item">
-                  <button 
-                    className="btn btn-success btn-sm"
-                    onClick={handleManageWatchlist.bind(this,index)}
-                    >
-                    {video.isInWatchlist?"In watch list":"Add to watch list"}
-                  </button>
-                </li>
-              </ul>
-            </div>
-          </div>
-       );
-        })}
-          </div>
+    <div>
+      <h2>Recommended Videos List</h2>
+      <RecommendedVideos
+        recommendedVideos={recommendedVideos}
+        onManageWatchlist={handleManageWatchlist}
+      />
+    </div>
   );
-}
+};
 
-export default RecommendedVideos;
+export default RecommendedVideo;*/
+
+const RecommendedVideo = (props) => {
+  return (
+    <div className="card">
+      <img
+        src={props.video.thumbnailUrl}
+        className="card-img-top"
+        alt={props.video.title}
+      />
+      <div className="card-body">
+        <h5 className="card-title">{props.video.title}</h5>
+        <p className="card-text">{props.video.description}</p>
+      </div>
+      <ul className="list-group list-group-flush">
+        <li className="list-group-item">{props.video.category}</li>
+        <li className="list-group-item">{props.video.publishedOn}</li>
+        <li className="list-group-item">
+          <button className="btn btn-success btn-sm" onClick={props.onClick}>
+            {/* conditional rendering inside JSX*/}
+            {props.video.isInWatchlist ? "In watchlist" : " Add to watchlist"}
+          </button>
+          {props.video.isInWatchlist}
+        </li>
+      </ul>
+    </div>
+  );
+};
+ 
+export default RecommendedVideo;

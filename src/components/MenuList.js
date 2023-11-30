@@ -1,6 +1,8 @@
-// Fc with arrow functions
 import { Link } from "react-router-dom";
+
+// FC with Arrow Fn
 const MenuList = () => {
+  // must return JSX
   return (
     <ul className="navbar-nav me-auto mb-2 mb-md-0">
       <li className="nav-item">
@@ -33,7 +35,6 @@ const MenuList = () => {
           Unit Testing Demo
         </Link>
       </li>
-
       <li className="nav-item">
         <Link className="nav-link" to="/about-us">
           About Us
@@ -46,6 +47,6 @@ const MenuList = () => {
       </li>
     </ul>
   );
-};
+}
 
 export default MenuList;

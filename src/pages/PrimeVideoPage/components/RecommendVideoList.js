@@ -1,52 +1,5 @@
-/*import React from 'react';
-
-const RecommendedVideosList = ({ recommendedVideos, onManageWatchlist }) => {
-  const handleManageWatchlist = (index) => {
-    onManageWatchlist(index);
-  };
-
-  if (recommendedVideos.length === 0) {
-    return (
-      <div className="alert alert-warning">
-        Unable to suggest Recommended videos. Please watch more videos.
-      </div>
-    );
-  }
-
-  return (
-    <div className="row">
-      {recommendedVideos.map((video, index) => (
-        <div className="col-md-3" key={video.id}>
-          <div className="card">
-            <img src={video.thumbnailUrl} className="card-img-top" alt={video.title} />
-            <div className="card-body">
-              <h5 className="card-title">{video.title}</h5>
-              <p className="card-text">{video.description}</p>
-            </div>
-            <ul className="list-group list-group-flush">
-              <li className="list-group-item">{video.category}</li>
-              <li className="list-group-item">{video.publishedOn}</li>
-              <li className="list-group-item">
-                <button
-                  className="btn btn-success btn-sm"
-                  onClick={handleManageWatchlist.bind(this, index)}
-                >
-                  {video.isInWatchlist ? "In watch list" : "Add to watch list"}
-                </button>
-              </li>
-            </ul>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-};
-
-export default RecommendedVideosList;*/
-
 import { useState } from "react";
-import RecommendVideo from "./RecommendVideo";
- 
+
 const RecommendVideoList = () => {
   // Let's have the comp wide updatable data
   const [recommendedVideos, setRecommendedVideos] = useState([
@@ -89,7 +42,8 @@ const RecommendVideoList = () => {
       isInWatchlist: false,
     },
   ]);
- 
+
+  // conditional rendering outside JSX
   if (recommendedVideos.length === 0) {
     return (
       <div className="alert alert-warning">
@@ -97,30 +51,52 @@ const RecommendVideoList = () => {
       </div>
     );
   }
- 
+
   const handleManageWatchlist = (index) => {
+    // receive index as param
     console.log(index);
- 
+    // Update the state immutably
     const videos = [...recommendedVideos];
     videos[index].isInWatchlist = !videos[index].isInWatchlist;
+    // DO NOT mutate state directly.. use the setter to update the state
     setRecommendedVideos(videos);
   };
- 
+
   return (
     <div className="row">
+      {/* Lists = looping through the array and rendering JSX */}
       {recommendedVideos.map((video, index) => {
         return (
-          <div className="col-md-3" key={index} >    
-            <RecommendVideo
-              video={video}
-              onClick={handleManageWatchlist.bind(this, index)}
-            />
+          <div className="col-md-3" key={video.id}>
+            <div className="card">
+              <img
+                src={video.thumbnailUrl}
+                className="card-img-top"
+                alt={video.title}
+              />
+              <div className="card-body">
+                <h5 className="card-title">{video.title}</h5>
+                <p className="card-text">{video.description}</p>
+              </div>
+              <ul className="list-group list-group-flush">
+                <li className="list-group-item">{video.category}</li>
+                <li className="list-group-item">{video.publishedOn}</li>
+                <li className="list-group-item">
+                  <button
+                    className="btn btn-success btn-sm"
+                    onClick={handleManageWatchlist.bind(this, index)}
+                  >
+                    {/* Conditional Rendering inside JSX */}
+                    {video.isInWatchlist ? "In Watchlist" : "Add to Watchlist"}
+                  </button>
+                </li>
+              </ul>
+            </div>
           </div>
         );
       })}
     </div>
   );
 };
- 
-export default RecommendVideoList;
 
+export default RecommendVideoList;

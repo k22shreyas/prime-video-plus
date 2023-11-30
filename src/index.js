@@ -1,18 +1,15 @@
-import React from 'react'; // importing offcial react library
-import ReactDOM from 'react-dom/client'; // importing react-dom for working with the DOM
-import './index.css'; // importing css 
-import App from './App'; // Importing app component
-import reportWebVitals from './reportWebVitals'; // importing webvitals setup
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap-icons/font/bootstrap-icons.css';
+import React from "react"; // importing official react library
+import ReactDOM from "react-dom/client"; // importing react-dom for working with the DOM.
+import "./index.css"; // importing css
+import App from "./App"; // Importing App Component
+import reportWebVitals from "./reportWebVitals"; // importing webvitals setup
 
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-//app component is rendered in a div that has an id 'root'
+const root = ReactDOM.createRoot(document.getElementById("root"));
+// App Component is rendered in a div that has an id 'root'
 root.render(
-  //<React.StrictMode>
+  // <React.StrictMode>
     <App />
-  //</React.StrictMode>
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

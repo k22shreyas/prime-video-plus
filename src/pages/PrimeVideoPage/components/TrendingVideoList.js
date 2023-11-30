@@ -3,7 +3,7 @@ import { useState } from "react";
 const TrendingVideoList = () => {
   // state = component wide updateable data
   const [resolution, setResolution] = useState("HD");
-  const [trendingVideos, setTrendingVideos] = useState([
+  const [trendingVideos] = useState([
     {
       id: 87654,
       title: "Man Vs Wild",

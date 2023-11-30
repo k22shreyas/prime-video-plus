@@ -1,7 +1,7 @@
 const UnitTestingDemoPage = () => {
-  return(
-    <div>Unit Testing Demo Page</div>
+  return (
+    <div>UnitTestingDemoPage</div>
   )
 }
- 
+
 export default UnitTestingDemoPage;

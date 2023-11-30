@@ -1,7 +1,7 @@
 import LatestVideoList from "./components/LatestVideoList";
-import TrendingVideoList from "./components/TrendingVideoList";
-import RecommendedVideos from "./components/RecommendedVideos";
+import RecommendVideoList from "./components/RecommendVideoList";
 import Subscription from "./components/Subscription";
+import TrendingVideoList from "./components/TrendingVideoList";
 
 const PrimeVideoPage = () => {
   return (
@@ -17,11 +17,14 @@ const PrimeVideoPage = () => {
       <hr />
       <h2>
         Recommended Videos | States, Events, Conditional Rendering, Lists & Keys
+        Demo
       </h2>
-        <RecommendedVideos />
+      <RecommendVideoList />
+
+
       <hr />
       <h2>Styling in React JS</h2>
-        <Subscription />
+      <Subscription />
     </div>
   );
 };
