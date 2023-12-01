@@ -10,9 +10,9 @@ import AboutUsPage from "../pages/AboutUsPage/AboutUsPage";
 import ContactUsPage from "../pages/ContactUsPage/ContactUsPage";
 import AddUser from "../pages/UsersPage/components/AddUser";
 import UserDetails from "../pages/UsersPage/UserDetails";
-import History from "../pages/AboutUsPage/History";
-import Team from "../pages/AboutUsPage/Team";
-import Careers from "../pages/AboutUsPage/Careers";
+import History from "../pages/AboutUsPage/components/History";
+import Team from "../pages/AboutUsPage/components/Team";
+import Careers from "../pages/AboutUsPage/components/Careers";
 
 const AppRoutes = () => {
   return (
@@ -21,7 +21,7 @@ const AppRoutes = () => {
       <Route path="/prime-video" element={<PrimeVideoPage />} />
       <Route path="/users" element={<UsersPage />} />
       <Route path="/users/add" element={<AddUser />} />
-      <Route path="/users/1" element={<UserDetails />} />
+      <Route path="/users/:userId" element={<UserDetails />} />
       <Route path="/products" element={<ProductsPage />} />
       <Route path="/todos" element={<TodosPage />} />
       <Route path="/unit-testing-demo" element={<UnitTestingDemoPage />} />
