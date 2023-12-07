@@ -9,13 +9,21 @@ import UnitTestingDemoPage from "../pages/UnitTestingDemoPage/UnitTestingDemoPag
 import AboutUsPage from "../pages/AboutUsPage/AboutUsPage";
 import ContactUsPage from "../pages/ContactUsPage/ContactUsPage";
 import AddUser from "../pages/UsersPage/components/AddUser";
-import UserDetails from "../pages/UsersPage/UserDetails";
 import History from "../pages/AboutUsPage/components/History";
 import Team from "../pages/AboutUsPage/components/Team";
 import Careers from "../pages/AboutUsPage/components/Careers";
+import UserDetails from "../pages/UsersPage/components/UserDetails";
+import { ErrorBoundary } from "react-error-boundary";
 
 const AppRoutes = () => {
   return (
+    <ErrorBoundary
+      fallback={
+        <div className="alert alert-danger">
+          some Error occured..try again later
+        </div>
+      }
+    >
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/prime-video" element={<PrimeVideoPage />} />
@@ -32,6 +40,7 @@ const AppRoutes = () => {
       </Route>
       <Route path="/contact-us" element={<ContactUsPage />} />
     </Routes>
+    </ErrorBoundary>
   );
 };
 

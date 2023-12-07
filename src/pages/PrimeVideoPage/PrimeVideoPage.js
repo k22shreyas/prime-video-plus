@@ -2,11 +2,25 @@ import LatestVideoList from "./components/LatestVideoList";
 import RecommendVideoList from "./components/RecommendVideoList";
 import Subscription from "./components/Subscription";
 import TrendingVideoList from "./components/TrendingVideoList";
+import { useNavigate } from "react-router-dom";
 
 const PrimeVideoPage = () => {
+
+  const navigate = useNavigate();
+  const handleClick = () => navigate("/products");
+
   return (
     <div>
-      <h1>Prime Video App</h1>
+      <div className="row">
+      <div className="col-md-10 mb-3">
+      <h1>Prime Video App</h1>      
+      </div>
+      <div className="col-md-2 mb-3">
+      <button className="btn btn-primary col-12 mt-2" onClick={handleClick}>
+          Buy Products
+        </button>
+      </div>
+      </div>
       <h2>Latest Videos | Props Demo</h2>
       <LatestVideoList />
 

@@ -1,50 +1,46 @@
+import React from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import axios from "axios";
-import React, { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+//import "react-toastify/dist/ReactToastify.css";
 
 const AddUser = () => {
-  const [addUserForm, setAddUserForm] = useState({
-    name: '',
-    phone: '',
-    email: ''
-  });
+  const navigate = useNavigate();
+  const handleClick = () => navigate("/users");
 
-  const [isSaved, setIsSaved] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [isCreatingUser, setIsCreatingUser] = useState(false);
 
-  const handleChange = (event) => {
-    setAddUserForm({
-      ...addUserForm,
-      [event.target.name]: event.target.value,
-    });
-  }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
 
-  const handleCreateUser = (event) => {
-    event.preventDefault();
-    console.log(addUserForm); // submittable form data to the REST API
-
-    // Let's send the above data to the REST API
-    // 1. What's the REST API URL? https://jsonplaceholder.typicode.com/users
-    // 2. What's the HTTP Method? POST
-    // 3. What's the REST API Client Tool? axios (npm i axios) or fetch 
-    // 4. What's the form data? addUserForm
-    axios.post("https://jsonplaceholder.typicode.com/users", addUserForm)
-      .then((res) => { // when the response is successful
+  const onSubmit = (data) => {
+    setIsCreatingUser(true);
+    axios
+      .post("https://jsonplaceholder.typicode.com/users", data)
+      .then((res) => {
         console.log(res);
-        setIsSaved(true);
+        reset();
+        toast.success("User created successfully");
       })
-      .catch((err) => { // when error occurs
-        console.log(err); 
-        setIsError(true);
+      .catch((err) => {
+        console.log(err);
+        toast.error("Unable to create user. Try again later");
       })
       .finally(() => {
-        console.log('It is over!');
-      })
+        setIsCreatingUser(false);
+      });
   };
 
   return (
     <div className="row">
       <h1>Add User</h1>
-      <form className="col-md-4 offset-md-4" onSubmit={handleCreateUser}>
+      <form className="col-md-4 offset-md-4" onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-3">
           <label htmlFor="nameInput" className="form-label">
             Name
@@ -53,11 +49,12 @@ const AddUser = () => {
             type="text"
             className="form-control"
             id="nameInput"
-            name="name"
             placeholder="Enter Name"
-            value={addUserForm.name}
-            onChange={handleChange}
+            {...register("name", {
+              required: true,
+            })}
           />
+          {errors.name && <span className="text-danger">Name is required</span>}
         </div>
         <div className="mb-3">
           <label htmlFor="phoneInput" className="form-label">
@@ -67,11 +64,21 @@ const AddUser = () => {
             type="text"
             className="form-control"
             id="phoneInput"
-            name="phone"
             placeholder="Enter Phone"
-            value={addUserForm.phone}
-            onChange={handleChange}
+            {...register("phone", {
+              required: true,
+              maxLength: 10,
+              minLength: 6,
+            })}
           />
+          {errors.phone && errors.phone.type === "required" && (
+            <span className="text-danger">Phone is required</span>
+          )}
+          {errors.phone && errors.phone.type === "maxLength" && (
+            <span className="text-danger">
+              Phone should be maximum 10 digits
+            </span>
+          )}
         </div>
         <div className="mb-3">
           <label htmlFor="emailInput" className="form-label">
@@ -81,25 +88,32 @@ const AddUser = () => {
             type="email"
             className="form-control"
             id="emailInput"
-            name="email"
             placeholder="Enter Email"
-            value={addUserForm.email}
-            onChange={handleChange}
+            {...register("email", {
+              required: true,
+            })}
           />
+          {errors.email && (
+            <span className="text-danger">Email is required</span>
+          )}
         </div>
-        {isSaved && (
-          <div className="alert alert-success">Saved Successfully!</div>
-        )}
-
-        {isError && (
-          <div className="alert alert-danger">
-            Unable to create user. Try again later
+        <div className="row">
+          <div className="col-md-6 mb-3">
+            <button
+              type="submit"
+              className="btn btn-primary col-12"
+              disabled={isCreatingUser}
+            >
+              {isCreatingUser ? "Creating User..." : "Create User"}
+            </button>
           </div>
-        )}
-
-        <button type="submit" className="btn btn-primary">
-          Create User
-        </button>
+          <div className="col-md-6 mb-3">
+            <button className="btn btn-dark col-12" onClick={handleClick}>
+              Go Back
+            </button>
+          </div>
+        </div>
+        <ToastContainer />
       </form>
     </div>
   );

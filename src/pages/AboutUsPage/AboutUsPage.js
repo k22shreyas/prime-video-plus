@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Outlet } from "react-router-dom";
+import CompanyInfo from "../UnitTestingDemoPage/components/CompanyInfo";
 
 function AboutUsPage() {
   return (
