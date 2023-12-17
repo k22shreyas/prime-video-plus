@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
 
-const UserDetails = () => { 
-
+const UserDetails = () => {
   const navigate = useNavigate();
-  const handleClick = () => navigate('/users');
+  const handleClick = () => navigate("/users");
+  const handleEditClick = () => navigate("/users/edit");
 
   // loading state
   const [isLoading, setIsLoading] = useState(true);
@@ -34,29 +35,32 @@ const UserDetails = () => {
     fetchUserById();
   });
 
-  const handleDeleteButtonClick = async() => {
-    try{
+  const handleDeleteButtonClick = async () => {
+    try {
       const response = await axios.delete(
         `https://jsonplaceholder.typicode.com/users/${userId}`
       );
       console.log(response);
-      alert("User deleated successfully.");
-      navigate("/users");
+      toast.success("User deleted successfully");
+      setTimeout(() => {
+        navigate("/users");
+      }, 6000);
     } catch (err) {
       console.log(err);
+      toast.error("Unable to delete user. Try again later");
       setIsError(true);
     }
-  }
-  
+  };
+
   return (
     <div className="row mt-2">
       <h2>
         <span>View User Details</span>
       </h2>
       <div className="col-md-12">
-      <button className="btn btn-dark" onClick={handleClick}>
-      Go Back
-    </button>
+        <button className="btn btn-dark" onClick={handleClick}>
+          Go Back
+        </button>
 
         {isLoading && (
           <div className="text-center">
@@ -80,10 +84,19 @@ const UserDetails = () => {
             <h5 className="card-title">Name: {user.name}</h5>
             <p className="card-text">Email: {user.email}</p>
             <p className="card-text">Phone: {user.phone}</p>
-            <button className="btn btn-primary">Edit</button>
-            <button className="btn btn-outline-danger" onClick={handleDeleteButtonClick}>Delete</button>
+            <button 
+            className="btn btn-primary" 
+            onClick={handleEditClick}>
+              Edit
+            </button>
+            <button
+            className="btn btn-outline-danger"
+            onClick={handleDeleteButtonClick}>
+              Delete
+            </button>
           </div>
         </div>
+        <ToastContainer />
       </div>
     </div>
   );

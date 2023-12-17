@@ -1,8 +1,8 @@
 import LatestVideoList from "./components/LatestVideoList";
-import RecommendVideoList from "./components/RecommendVideoList";
 import Subscription from "./components/Subscription";
 import TrendingVideoList from "./components/TrendingVideoList";
 import { useNavigate } from "react-router-dom";
+import RecommendVideoList from "./components/RecommendedVideoList";
 
 const PrimeVideoPage = () => {
 

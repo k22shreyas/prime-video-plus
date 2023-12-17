@@ -42,6 +42,7 @@ const LatestVideoList = () => {
           category={latestVideos[1].category}
           publishedOn={latestVideos[1].publishedOn}
         >
+          {/* Because description is defined in between <latestvideo> tag and inside it, makes it a child content that can be passed to other components and used as PROPS.CHILDREN */}
           {latestVideos[1].description}
         </LatestVideo>
       </div>

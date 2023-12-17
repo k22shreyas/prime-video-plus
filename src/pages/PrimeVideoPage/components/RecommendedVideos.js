@@ -1,66 +1,5 @@
-/*import React, { useState } from 'react';
-import RecommendedVideos from './RecommendedVideos';
-
-const RecommendedVideo = () => {
-  const [recommendedVideos, setRecommendedVideos] = useState([
-    {
-      id: 87654,
-      title: "Man Vs Wild",
-      description: "A Wild adventure show by Bear Grylls",
-      thumbnailUrl: "https://placehold.co/350x250",
-      category: "Infotainment",
-      publishedOn: "2 days ago",
-      isInWatchlist: false,
-    },
-    {
-      id: 987654,
-      title: "Planet Earth II",
-      description: "A show hosted by David Attenborough on BBC Earth",
-      thumbnailUrl: "https://placehold.co/350x250",
-      category: "Infotainment",
-      publishedOn: "3 days ago",
-      isInWatchlist: false,
-    },
-    {
-      id: 324534,
-      title: "Formula 1 - Final",
-      description:
-        "Enjoy the final getaway of the year as Max Verstappen leads the field in Abu Dhabi",
-      thumbnailUrl: "https://placehold.co/350x250",
-      category: "Sports",
-      publishedOn: "2 hours ago",
-      isInWatchlist: false,
-    },
-    {
-      id: 5467890,
-      title: "Greatest goals in the Premier League",
-      description:
-        "Garnacho's third-minute wonder goal muted the protesting Everton supporters at Goodison Park.",
-      thumbnailUrl: "https://placehold.co/350x250",
-      category: "Sports",
-      publishedOn: "5 hours ago",
-      isInWatchlist: false,
-    },
-  ]);
-
-  const handleManageWatchlist = (index) => {
-    const updatedVideos = [...recommendedVideos];
-    updatedVideos[index].isInWatchlist = !updatedVideos[index].isInWatchlist;
-    setRecommendedVideos(updatedVideos);
-  };
-
-  return (
-    <div>
-      <h2>Recommended Videos List</h2>
-      <RecommendedVideos
-        recommendedVideos={recommendedVideos}
-        onManageWatchlist={handleManageWatchlist}
-      />
-    </div>
-  );
-};
-
-export default RecommendedVideo;*/
+import React from "react";
+import PropTypes from "prop-types";
 
 const RecommendedVideo = (props) => {
   return (
@@ -87,6 +26,14 @@ const RecommendedVideo = (props) => {
       </ul>
     </div>
   );
+};
+
+RecommendedVideo.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  thumbnailUrl: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+  publishedOn: PropTypes.string.isRequired,
 };
  
 export default RecommendedVideo;
